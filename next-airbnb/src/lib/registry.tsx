@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { useServerInsertedHTML } from "next/navigation";
 import { ServerStyleSheet, StyleSheetManager } from "styled-components";
+import { GlobalStyle } from "../styles/global-styles";
 
 export default function StyledComponentsRegistry({ children }: { children: React.ReactNode }) {
   // Only create stylesheet once with lazy initial state
@@ -18,6 +19,9 @@ export default function StyledComponentsRegistry({ children }: { children: React
   if (typeof window !== "undefined") return <>{children}</>;
 
   return (
-    <StyleSheetManager sheet={styledComponentsStyleSheet.instance}>{children}</StyleSheetManager>
+    <StyleSheetManager sheet={styledComponentsStyleSheet.instance}>
+      <GlobalStyle />
+      {children}
+    </StyleSheetManager>
   );
 }
